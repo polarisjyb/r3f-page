@@ -1,4 +1,10 @@
 {
+  "name": "r3f-page",
+  "version": "q",
+  "private": true,
+  "main": "index.js",
+  "repository": "https://github.com/polarisjyb/r3f-page.git",
+  "author": "polarisjyb <polarislsj@gmail.com>",
   "devDependencies": {
     "webpack": "^5.76.3",
     "webpack-dev-server": "^4.13.1"
