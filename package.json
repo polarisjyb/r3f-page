@@ -3,6 +3,7 @@
   "version": "q",
   "private": true,
   "main": "index.js",
+  "description": "react-three-fiber 설정",
   "repository": "https://github.com/polarisjyb/r3f-page.git",
   "author": "polarisjyb <polarislsj@gmail.com>",
   "devDependencies": {
