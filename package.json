@@ -10,7 +10,7 @@
   },
   "author": "polarisjyb <polarislsj@gmail.com>",
   "scripts": {
-    "dev": "webpack-dev-server --progress --mode development",
+    "dev": "webpack-dev-server --open --hot --progress --mode development",
     "build": "webpack --progress --mode production"
   },
   "devDependencies": {
