@@ -49,7 +49,7 @@ module.exports = {
     devServer: {
         // webpack-dev-server 설정
         host: 'localhost',
-        port: 3000,
+        port: 8080,
         hot: true, // 모듈이 수정되면 자동 리로링
         historyApiFallback: true,
     },
