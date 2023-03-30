@@ -10,8 +10,8 @@
   },
   "author": "polarisjyb <polarislsj@gmail.com>",
   "scripts": {
-    "dev": "webpack-dev-server --open --hot --progress --mode development",
-    "build": "webpack --progress --mode production"
+    "dev": "webpack-dev-server --config config/webpack.dev.js",
+    "build": "webpack --config config/webpack.prod.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
