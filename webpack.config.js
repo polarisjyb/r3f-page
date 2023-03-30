@@ -62,7 +62,7 @@ module.exports = {
         // webpack-dev-server 설정
         host: 'localhost',
         port: 8080,
-        hot: true, // 모듈이 수정되면 자동 리로링
+        hot: true, // 모듈이 수정되면 자동 리로딩
         historyApiFallback: true,
     },
     devtool: 'eval-cheap-source-map', // 번들링된 소스와 원본 소스를 매핑해준다. 추적하기 쉬워서 디버깅이 원활해진다.
