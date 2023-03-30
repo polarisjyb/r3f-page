@@ -1,5 +1,5 @@
 import React from 'react';
-import '../public/d.png'
+import '../public/img/d.png'
 
 const App = () => {
   return (
@@ -7,7 +7,7 @@ const App = () => {
       <p>
         webpack
       </p>
-      <img src='../public/d.png'></img>
+      <img src='../public/img/d.png'></img>
     </div>
   );
 };
