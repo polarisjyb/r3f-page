@@ -3,6 +3,7 @@ const path = require('path');
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
     entry: {
@@ -45,6 +46,13 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/index.html', // 번들링된 js 소스가 index.html 템플릿에 들어가게 됨
         }),
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            reportFilename: 'bundle-report.html',
+            openAnalyzer: false,
+            generateStatsFile: true,
+            statsFilename: 'bundle-stats.json',
+        })
     ],
     devServer: {
         // webpack-dev-server 설정
