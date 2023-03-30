@@ -7,20 +7,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
-    entry: {
-        main: path.resolve(__dirname, 'src/index.js') // 진입점
-    },
-    output: {
-        // 번들링된 산출물의 경로와 번들링 파일 이름
-        path: path.resolve(__dirname, './dist'),
-        filename: 'index.bundle.js'
-    },
-    resolve: {
-        alias: {
-            components: path.resolve(__dirname, 'src'),
-        },
-        extensions: ['.js', '.jsx'],
-    },
+    entry: `${path.resolve(__dirname, "../src")}/index.js`,
     module: {
         // loader 설정
         rules: [
@@ -34,10 +21,11 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.jfif$/,
+                test: /\.(svg|png|jpg|gif)$/,
                 loader: 'file-loader',
                 options: {
-                    name: '[name].[ext]',
+                    name: 'public/img/[name].[ext]',
+                    
                 }
             },
         ],
@@ -58,13 +46,10 @@ module.exports = {
             React: 'react',
         }),
     ],
-    devServer: {
-        // webpack-dev-server 설정
-        host: 'localhost',
-        port: 8080,
-        hot: true, // 모듈이 수정되면 자동 리로딩
-        historyApiFallback: true,
-        liveReload: true,
+    resolve: {
+        alias: {
+            components: path.resolve(__dirname, 'src'),
+        },
+        extensions: ['.js', '.jsx'],
     },
-    devtool: 'eval-cheap-source-map', // 번들링된 소스와 원본 소스를 매핑해준다. 추적하기 쉬워서 디버깅이 원활해진다.
 };
