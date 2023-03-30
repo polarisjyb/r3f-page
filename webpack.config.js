@@ -52,7 +52,10 @@ module.exports = {
             openAnalyzer: false,
             generateStatsFile: true,
             statsFilename: 'bundle-stats.json',
-        })
+        }),
+        new webpack.ProvidePlugin({
+            React: 'react',
+        }),
     ],
     devServer: {
         // webpack-dev-server 설정
