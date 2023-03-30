@@ -7,9 +7,10 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     open: true,
+    compress: true,
     host: 'localhost',
     port: 8080,
-    hot: true, // 모듈이 수정되면 자동 리로링
+    hot: true,
     historyApiFallback: true,
     liveReload: true,
   },
