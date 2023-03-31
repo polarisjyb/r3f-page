@@ -28,6 +28,17 @@ module.exports = {
                     
                 }
             },
+            {
+                test: /\.(glb|gltf|stl)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'public/gltf/[name].[ext]',
+                        },
+                    },
+                ],
+            },
         ],
     },
     plugins: [
@@ -35,13 +46,13 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/index.html', // 번들링된 js 소스가 index.html 템플릿에 들어가게 됨
         }),
-        new BundleAnalyzerPlugin({
-            analyzerMode: 'static',
-            reportFilename: 'bundle-report.html',
-            openAnalyzer: false,
-            generateStatsFile: true,
-            statsFilename: 'bundle-stats.json',
-        }),
+        // new BundleAnalyzerPlugin({
+        //     analyzerMode: 'static',
+        //     reportFilename: 'bundle-report.html',
+        //     openAnalyzer: false,
+        //     generateStatsFile: true,
+        //     statsFilename: 'bundle-stats.json',
+        // }),
         new webpack.ProvidePlugin({
             React: 'react',
         }),
