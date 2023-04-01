@@ -1,5 +1,5 @@
 # r3f-my-page
-My Page
+This is a React application that uses the @react-three/fiber and @react-three/drei libraries to create a 3D scene.
 
 react, three.js, react-three-fiber, react-three-drei, webpack...
 
@@ -21,3 +21,5 @@ This runs the app in the development mode.
 Open [http://localhost:3000] to view it in your browser.
 
 The page will reload when you make changes.
+
+----------------------------------------------
