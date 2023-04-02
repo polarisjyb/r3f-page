@@ -1,10 +1,14 @@
-import React, { useRef } from 'react';
+import * as THREE from 'three'
+import React, { useRef, useEffect } from 'react';
+import { useFrame } from '@react-three/fiber'
+
 import { useGLTF, useAnimations } from '@react-three/drei';
 
 const Model = (props) => {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF('./model/cube.glb');
   const { actions } = useAnimations(animations, group);
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name='Scene'>

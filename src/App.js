@@ -1,18 +1,23 @@
 import React, { Suspense, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stage } from '@react-three/drei';
+import { OrbitControls, ScrollControls, Stage } from '@react-three/drei';
 import Model from './Model';
 
 const App = () => {
   const ref = useRef();
+
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ fov: 50 }}>
       <Suspense fallback={null}>
-        <Stage controls={ref} preset='rembrandt' intensity={1.5} environment='warehouse'>
-          <Model />
-        </Stage>
+        <ScrollControls>
+          <Stage controls={ref} preset='rembrandt' intensity={1.5} environment='warehouse'>
+            <Model scale={2} position={[10, 0, 0]} />
+            <Model scale={2} position={[0, 10, 0]} />
+            <Model scale={2} position={[0, 0, 10]} />
+          </Stage>
+        </ScrollControls>
       </Suspense>
-      <OrbitControls ref={ref} autoRotate />
+      <OrbitControls ref={ref} autoRotate/>
     </Canvas>
   );
 };
