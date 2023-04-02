@@ -1,120 +1,31 @@
-import React, { useRef } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
+import * as THREE from 'three'
+import { Suspense, useEffect, useLayoutEffect } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { ScrollControls, Sky, useScroll, useGLTF, useAnimations } from '@react-three/drei'
 
-const Model = (props) => {
-  const group = useRef();
-  const { nodes, materials, animations } = useGLTF('./model/cube.glb');
-  const { actions } = useAnimations(animations, group);
-  return (
-    <group ref={group} {...props} dispose={null}>
-      <group name='Scene'>
-        <group
-          name='Camera'
-          position={[7.358891, 4.958309, 6.925791]}
-          rotation={[1.242071, 0.329969, -0.759712]}
-        />
-        <group name='Cube001' />
-        <group name='Cube002' position={[0, 1, 0]}>
-          <mesh
-            name='Cube002_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube002_1.geometry}
-            material={materials['HoloFillDark.001']}
-          />
-          <mesh
-            name='Cube002_2'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube002_2.geometry}
-            material={materials['constant2.001']}
-          />
-        </group>
-        <group name='Cube003' position={[-1, -1, 0]}>
-          <mesh
-            name='Cube009'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube009.geometry}
-            material={materials.HoloFillDark}
-          />
-          <mesh
-            name='Cube009_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube009_1.geometry}
-            material={materials.constant2}
-          />
-        </group>
-        <group name='Cube004' position={[0, -1, 1]}>
-          <mesh
-            name='Cube010'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube010.geometry}
-            material={materials.HoloFillDark}
-          />
-          <mesh
-            name='Cube010_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube010_1.geometry}
-            material={materials.constant2}
-          />
-        </group>
-        <group name='Cube005' position={[1, -1, 0]}>
-          <mesh
-            name='Cube011'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube011.geometry}
-            material={materials.HoloFillDark}
-          />
-          <mesh
-            name='Cube011_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube011_1.geometry}
-            material={materials.constant2}
-          />
-        </group>
-        <group name='Cube006' position={[0, -1, -1]}>
-          <mesh
-            name='Cube012'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube012.geometry}
-            material={materials.constant2}
-          />
-          <mesh
-            name='Cube012_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube012_1.geometry}
-            material={materials.HoloFillDark}
-          />
-        </group>
-        <group name='Cube007'>
-          <mesh
-            name='Cube013'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube013.geometry}
-            material={materials.constant2}
-          />
-          <mesh
-            name='Cube013_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube013_1.geometry}
-            material={materials.HoloFillDark}
-          />
-        </group>
-      </group>
-    </group>
-  );
+const LittlestTokyo = ({ ...props }) => {
+  // This hook gives you offets, ranges and other useful things
+  const scroll = useScroll()
+  const { scene, nodes, animations } = useGLTF('./model/LittlestTokyo-transformed.glb')
+  const { actions } = useAnimations(animations, scene)
+  useLayoutEffect(() => Object.values(nodes).forEach((node) => (node.receiveShadow = node.castShadow = true)))
+  useEffect(() => void (actions['Take 001'].play().paused = true), [actions])
+  useFrame((state, delta) => {
+    const action = actions['Take 001']
+    // The offset is between 0 and 1, you can apply it to your models any way you like
+    const offset = 1 - scroll.offset
+    action.time = THREE.MathUtils.damp(action.time, (action.getClip().duration / 2) * offset, 100, delta)
+    state.camera.position.set(Math.sin(offset) * -10, Math.atan(offset * Math.PI * 2) * 5, Math.cos((offset * Math.PI) / 3) * -10)
+    state.camera.lookAt(0, 0, 0)
+  })
+  return <primitive object={scene} {...props} />
 }
 
-useGLTF.preload('model/cube.glb');
+/*
+author: glenatron (https://sketchfab.com/glenatron)
+license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+source: https://sketchfab.com/models/94b24a60dc1b48248de50bf087c0f042
+title: Littlest Tokyo */
+useGLTF.preload('model/LittlestTokyo-transformed.glb')
 
-export default Model;
+export default LittlestTokyo;
