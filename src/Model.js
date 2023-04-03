@@ -9,6 +9,22 @@ const Model = (props) => {
   const { nodes, materials, animations } = useGLTF('./model/cube.glb');
   const { actions } = useAnimations(animations, group);
 
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime()
+    group.current.rotation.x = -Math.PI / 1.75 + Math.cos(t / 2) / 8
+    group.current.rotation.y = Math.sin(t / 2) / 8
+    group.current.rotation.z = (1 + Math.sin(t / 1.5)) / 20
+    group.current.position.y = (1 + Math.sin(t / 1.5)) / 20
+  })
+
+  // useFrame((state) => {
+  //   const t = state.clock.getElapsedTime()
+  //   ref.current.rotation.x = -Math.PI / 1.75 + Math.cos(t / 4) / 8
+  //   ref.current.rotation.y = Math.sin(t / 4) / 8
+  //   ref.current.rotation.z = (1 + Math.sin(t / 1.5)) / 20
+  //   ref.current.position.y = (1 + Math.sin(t / 1.5)) / 10
+  // })
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name='Scene'>
